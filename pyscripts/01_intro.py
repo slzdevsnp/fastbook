@@ -6,8 +6,11 @@ def is_cat(x): return x[0].isupper()
 
 
 def model_cats_dogs():
+    batchsize=64  #32
+    print(f"training the cats and dogs model on resnet with batch size: {batchsize}")
     path = untar_data(URLs.PETS) / 'images'
     dls = ImageDataLoaders.from_name_func(path, get_image_files(path),
+                                          bs=batchsize,
                                           valid_pct=0.2, seed=42,
                                           label_func=is_cat,
                                           item_tfms=Resize(224))
